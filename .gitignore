@@ -1,0 +1,18 @@
+# eclipse
+.project
+.classpath
+.settings
+target/
+
+node_modules/
+dist/
+ts-types-*.tgz
+
+# idea
+.idea
+*.iml
+*.iws
+*.ipr
+
+# java
+*.class
