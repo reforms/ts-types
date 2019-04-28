@@ -1,4 +1,4 @@
-import { StringMap, ObjectMap, MapQualifier } from "ts_type_map";
+import { StringMap, ObjectMap, MapQ } from "ts_type_map";
 
 // Usage example: Only string value enable
 const UserData: StringMap = {
@@ -15,7 +15,7 @@ const BigData: ObjectMap = {
     }
 }
 
-type CustomMap = MapQualifier<number[]>
+type CustomMap = MapQ<number[]>
 
 // Usage example: Only array of numbers value enable
 const NumbersData: CustomMap = {

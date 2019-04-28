@@ -44,7 +44,7 @@ const BigData: ObjectMap = {
 
 ```typescript
 // Create your own Map Type
-type CustomMap = MapQualifier<number[]>
+type CustomMap = MapQ<number[]>
 
 // Only array of number values enable
 const NumbersData: CustomMap = {
@@ -66,6 +66,19 @@ const NumbersData: CustomMap = {
     Declared range with postfix 'n' make exclude last number from range.
     For example, range with 0 to 10 (excluded) is R10n, range from 0 to 50 (excluded) is R50n, and so on.
 
+```typescript
+// [0..23) Hour type
+type Hour = R24n;
+
+// [0..60) Minute type
+type Minute = R60n;
+
+// [0..60) Minute type
+type Second = R60n;
+
+// [0..1000) MilliSecond type
+type MilliSecond = R1000n;
+```
 
 ### RangeQualifier`<From,To>`
 
