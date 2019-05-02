@@ -21,13 +21,14 @@
     "scripts": {
         "clean:dist": "rimraf dist",
         "clean:pack": "rimraf ts-types-*.tgz",
-        "compile": "tsc --project tsconfig.json --noEmit --pretty --noErrorTruncation",
-        "lint": "tslint --config tslint.json --project tsconfig.json",
+        "compile": "tsc --project tsconfig-single.json --noEmit --pretty --noErrorTruncation",
+        "lint": "tslint --config tslint.json --project tsconfig-single.json",
         "lint:fix": "npm run lint -- --fix",
-        "build:types": "tsc --project tsconfig.json --pretty --noErrorTruncation --emitDeclarationOnly true --declarationMap true --outDir dist/types",
-        "build:commonjs": "tsc --project tsconfig.json --pretty --noErrorTruncation --declaration false --outDir dist/commonjs",
-        "build:es": "tsc --project tsconfig.json --pretty --noErrorTruncation --declaration false -m es6 --outDir dist/es",
-        "build": "npm run clean:dist && run-p build:types build:es build:commonjs",
+        "concat": "concat-cli -f src/ts/*.ts -o src/ts-out/ts-types.ts",
+        "build:types": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --emitDeclarationOnly true --declarationMap true --outDir dist/types",
+        "build:commonjs": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --declaration false --outDir dist/commonjs",
+        "build:es": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --declaration false -m es6 --outDir dist/es",
+        "build": "npm run clean:dist && run-p concat && run-p build:types build:es build:commonjs",
         "pack": "run-p clean:pack build && npm pack",
         "dtslint": "run-s clean:dist build:types dtslint:v2_8_plus"
     },
@@ -52,5 +53,9 @@
     "keywords": [
         "typescript",
         "types"
-    ]
+    ],
+    "dependencies": {
+        "concat": "^1.0.3",
+        "concat-cli": "^4.0.0"
+    }
 }
