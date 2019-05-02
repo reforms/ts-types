@@ -7,9 +7,9 @@ TypeScript Useful Types
     2. [ObjectMap](#objectmap)
     3. [MapQualifier`<T>`](#mapqualifier`<T>`)
 2. [Range Types](#range-types)
-    1. [R1 to R1000](declaredranges)
+    1. [R1 to R1000](#declared-ranges)
     2. [RangeQualifier`<From,To>`](#rangequalifier`<From,To>`)
-3. [Buildin](#buildinoverload)
+3. [Buildin Overload](#buildin-overload)
     1. [GetNames`<FromType, KeepType = any, Include = true>`](#getnames`<FromType,KeepType=any,Include=true>`)
     2. [LoseNames`<FromType, IgnoreType>`](#losenames`<FromType,IgnoreType>`)
 
@@ -114,7 +114,7 @@ type R_17_to_23 = RQ<R17n, R23>;
 type R_50_to_100n = RQ<R50n, R100n>;
 ```
 
-## Buildin overload
+## Buildin Overload
 
     Buildin overload are types with extra features of buildin TypeScript types.
 
