@@ -1,7 +1,5 @@
 import { GetNames, LoseNames } from "ts_type_buildin_over";
 
-// Keywords to fast: extract, name, get name, lose name
-
 class SimpleClass {
 
     static ZERO = 0;
@@ -12,8 +10,6 @@ class SimpleClass {
 
     readonly three: number = 3;
 
-    constructor() {}
-
     getOne(): string {
         return this.one;
     }
@@ -23,23 +19,32 @@ class SimpleClass {
     }
 }
 
-// >> "one" | "two"
-type StringPropNames = GetNames<SimpleClass, string>; 
+// be: "one" | "two" | "three" | "getOne" | "getTwo"
+type SC_AllNames = GetNames<SimpleClass>;  // like keyof SimpleClass
 
-// >> "one" | "two" | "three" | "getOne" | "getTwo"
-type AllNames = GetNames<SimpleClass>;  // like keyof SimpleClass
+// be: "one" | "two"
+type SC_StringNames = GetNames<SimpleClass, string>; 
 
-// >> "getOne" | "getTwo"
-type FunctionNames = GetNames<SimpleClass, Function>;
+// be: "getOne" | "getTwo"
+type SC_FunctionNames = GetNames<SimpleClass, Function>;
 
-// >> "three" | "getOne" | "getTwo"
-type NonStringPropNames1 = GetNames<SimpleClass, string, false>; 
+// be: "three" | "getOne" | "getTwo"
+type SC_NonStringNames = GetNames<SimpleClass, string, false>; 
 
-// >> "three" | "getOne" | "getTwo"
-type NonStringPropNames2 = LoseNames<SimpleClass, string>; 
+// be: "three" | "getOne" | "getTwo"
+type SC_NonStringNames2 = LoseNames<SimpleClass, string>; 
 
-// "one" | "two" | "three" | "getOne" | "getTwo" | "prototype" | "ZERO"
-type AllNamesWithStatic = GetNames<SimpleClass & typeof SimpleClass>;
+// be: "one" | "two" | "three" | "getOne" | "getTwo" | "prototype" | "ZERO"
+type SC_AllNamesWithStatic = GetNames<SimpleClass & typeof SimpleClass>;
 
-// "one" | "two" | "three" | "getOne" | "getTwo"
-type Names = keyof SimpleClass;
+type Person = {
+    age: number;
+    name: string;
+    lastName: string;
+}
+// P is Person
+// be: "age"
+type P_Age = LoseNames<Person, string>;
+
+// be: "name" | "lastName"
+type P_Names = LoseNames<Person, number>;
