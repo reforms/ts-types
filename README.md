@@ -1,7 +1,13 @@
 # ts-types
+
 TypeScript Useful Types
 
+## NPM
+
+    npm install ts-it-types
+
 ## Contents
+
 1. [Map Types](#map-types)
     1. [StringMap](#stringmap)
     2. [ObjectMap](#objectmap)
