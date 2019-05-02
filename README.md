@@ -1,4 +1,4 @@
-# ts-types
+# ts-it-types
 
 TypeScript Useful Types
 
