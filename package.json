@@ -1,6 +1,7 @@
 {
-    "name": "ts-types",
-    "version": "1.1.1",
+    "name": "ts-it-types",
+    "version": "1.1.2",
+    
     "description": "TypeScript Useful Types",
     "repository": {
         "type": "git",
@@ -14,17 +15,17 @@
         "dist",
         "src"
     ],
-    "main": "dist/commonjs/ts_types.js",
-    "jsnext:main": "dist/es/ts_types.js",
-    "module": "dist/es/ts_types.js",
-    "types": "dist/types/ts_types.d.ts",
+    "main": "dist/commonjs/ts_it_types.js",
+    "jsnext:main": "dist/es/ts_it_types.js",
+    "module": "dist/es/ts_it_types.js",
+    "types": "dist/types/ts_it_types.d.ts",
     "scripts": {
         "clean:dist": "rimraf dist",
-        "clean:pack": "rimraf ts-types-*.tgz",
+        "clean:pack": "rimraf ts_it_types-*.tgz",
         "compile": "tsc --project tsconfig-single.json --noEmit --pretty --noErrorTruncation",
         "lint": "tslint --config tslint.json --project tsconfig-single.json",
         "lint:fix": "npm run lint -- --fix",
-        "concat": "concat-cli -f src/ts/*.ts -o src/ts-out/ts-types.ts",
+        "concat": "concat-cli -f src/ts/*.ts -o src/ts-out/ts_it_types.ts",
         "build:types": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --emitDeclarationOnly true --declarationMap true --outDir dist/types",
         "build:commonjs": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --declaration false --outDir dist/commonjs",
         "build:es": "tsc --project tsconfig-single.json --pretty --noErrorTruncation --declaration false -m es6 --outDir dist/es",
@@ -45,12 +46,12 @@
         "rimraf": "2.6.2",
         "tslint": "5.10.0",
         "tslint-config-prettier": "1.13.0",
-        "typescript": "2.9.2",
+        "typescript": "3.4.3",
         "concat": "^1.0.3",
         "concat-cli": "^4.0.0"
     },
     "peerDependencies": {
-        "typescript": ">= 3.0.0"
+        "typescript": ">= 3.4.3"
     },
     "keywords": [
         "typescript",

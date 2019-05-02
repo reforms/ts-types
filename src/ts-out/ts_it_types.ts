@@ -21,8 +21,19 @@ export type GetNames<FromType, KeepType = any, Include = true> = {
  */
 export type LoseNames<FromType, IgnoreType> = GetNames<FromType, IgnoreType, false>;
 
-// type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any;
+/**
+ * Controll of Switch block
+ */
+export class UnreachableCaseError extends Error {
 
+    /**
+     * Конструктор
+     * @param value аргумент switch
+     */
+    constructor(value: never) {
+        super(`Unreachable case: ${value}`);
+    }
+}
 
 // --------------------- MAP BLOCK --------------------- \\
 /**
