@@ -6,6 +6,10 @@ TypeScript Useful Types
 
     npm install ts-it-types
 
+## Single file
+
+[All types together in ts_it_types.ts](https://github.com/reforms/ts-types/blob/master/src/ts-out/ts_it_types.ts)
+
 ## Contents
 
 1. [Map Types](#map-types)
@@ -30,6 +34,8 @@ TypeScript Useful Types
 [StringMap declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_map.ts)
 
 ```typescript
+import { StringMap } from "ts-it-types";
+
 // Only string value enable
 const UserData: StringMap = {
     "login": "guest",
@@ -44,6 +50,8 @@ const UserData: StringMap = {
 [ObjectMap declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_map.ts)
 
 ```typescript
+import { ObjectMap } from "ts-it-types";
+
 // Any value available
 const BigData: ObjectMap = {
     "array": ["0", "1", "2"],
@@ -63,6 +71,8 @@ const BigData: ObjectMap = {
 [MapQualifier declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_map.ts)
 
 ```typescript
+import { MapQ } from "ts-it-types";
+
 // Create your own Map Type
 type CustomMap = MapQ<number[]>
 
@@ -89,6 +99,8 @@ const NumbersData: CustomMap = {
 [Ranges declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_ranges.ts)
 
 ```typescript
+import { R24n, R60n, R1000n } from "ts-it-types";
+
 // [0..23) Hour type
 type Hour = R24n;
 
@@ -113,6 +125,8 @@ type MilliSecond = R1000n;
 [RangeQualifier declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_ranges.ts)
 
 ```typescript
+import { R17n, R23, R50n, R100n, RQ } from "ts-it-types";
+
 // [17 .. 23] Include all numbers from 17 to 23
 type R_17_to_23 = RQ<R17n, R23>;
 
@@ -135,6 +149,8 @@ type R_50_to_100n = RQ<R50n, R100n>;
 [GetNames declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_buildin_over.ts)
 
 ```typescript
+import { GetNames } from "ts-it-types";
+
 class SimpleClass {
 
     static ZERO = 0;
@@ -182,6 +198,8 @@ type SC_AllNamesWithStatic = GetNames<SimpleClass & typeof SimpleClass>;
 [LoseNames declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_buildin_over.ts)
 
 ```typescript
+import { LoseNames } from "ts-it-types";
+
 type Person = {
     age: number;
     name: string;
