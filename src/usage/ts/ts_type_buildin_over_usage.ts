@@ -1,4 +1,4 @@
-import { GetNames, LoseNames } from "ts_type_buildin_over";
+import { GetNames, LoseNames, Maybe } from "ts_type_buildin_over";
 
 class SimpleClass {
 
@@ -48,3 +48,15 @@ type P_Age = LoseNames<Person, string>;
 
 // be: "name" | "lastName"
 type P_Names = LoseNames<Person, number>;
+
+
+function processData(command: string): Maybe<string> {
+    if (command === "start") {
+        // to be some code here
+        return "start:ok"; // if command is start - get some usuful result
+    }
+    if (command === "stop") {
+        // to be some code here
+        console.log("stop now"); // if command is stop - nothing return;
+    }
+}

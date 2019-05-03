@@ -22,15 +22,6 @@ export type GetNames<FromType, KeepType = any, Include = true> = {
 export type LoseNames<FromType, IgnoreType> = GetNames<FromType, IgnoreType, false>;
 
 /**
- * Controll of Switch block
+ * Be or not to be...
  */
-export class UnreachableCaseError extends Error {
-
-    /**
-     * Конструктор
-     * @param value аргумент switch
-     */
-    constructor(value: never) {
-        super(`Unreachable case: ${value}`);
-    }
-}
+export type Maybe<T> = T | void;

@@ -22,6 +22,9 @@ TypeScript Useful Types
 3. [Buildin Overload](#buildin-overload)
     1. [GetNames`<FromType, KeepType = any, Include = true>`](#getnames`<FromType,KeepType=any,Include=true>`)
     2. [LoseNames`<FromType, IgnoreType>`](#losenames`<FromType,IgnoreType>`)
+    3. [Maybe`<T>`](#maybe`<T>`)
+4. [Statement Control](#statement-control)
+    1. [UnreachableStatementError](#unreachablestatementerror)
 
 ## Map types
 
@@ -212,4 +215,76 @@ type P_Age = LoseNames<Person, string>;
 
 // be: "name" | "lastName"
 type P_Names = LoseNames<Person, number>;
+```
+
+### Maybe`<T>`
+
+    Maybe is type to define part of code which can contains value or value is absent.
+
+[Maybe declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_buildin_over.ts)
+
+```typescript
+import { Maybe } from "ts-it-types";
+
+function processData(command: string): Maybe<string> {
+    if (command === "start") {
+        // to be some code here
+        return "start:ok"; // if command is start - get some usuful result
+    }
+    if (command === "stop") {
+        // to be some code here
+        console.log("stop now"); // if command is stop - nothing return;
+    }
+}
+```
+
+## Statement Control
+
+    Statement control is way to control some block of code which can be changed in future
+
+### UnreachableStatementError
+
+    UnreachableStatementError is error which must be throw in unreachable part of code.
+    Code is unreachable now but not in the future. So you control changes which will happens.
+    Short name of UnreachableStatementError is NeverError
+
+[UnreachableStatementError declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_error.ts)
+
+```typescript
+import { NeverError } from "ts-it-types";
+
+enum Step {
+    STEP_1,
+    STEP_2,
+    // try to uncomment, get error at compile time
+    // STEP_3 // >> Argument of type 'Step.STEP_3' is not assignable to parameter of type 'never'
+}
+
+class StepWizard {
+
+    // if statement control
+    buildPane(step: Step): void {
+        if (step === Step.STEP_1) {
+            console.log("some code for step 1");
+            return;
+        }
+        if (step === Step.STEP_2) {
+            console.log("some code for step 2");
+            return;
+        }
+        // Control statement in future. If anybody add NEW step, it part of code will be broken
+        throw new NeverError(step); // >> error here if uncomment STEP_3
+    }
+
+    // switch statement control
+    getStepName(step: Step): string {
+        switch (step) {
+            case Step.STEP_1: return "step_1"
+            case Step.STEP_2: return "step_2"
+            default: 
+                // Control statement in future. If anybody add NEW step, it part of code will be broken
+                throw new NeverError(step); // >> error here if uncomment STEP_3
+        }
+    }
+}
 ```
