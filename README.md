@@ -23,6 +23,7 @@ TypeScript Useful Types
     1. [GetNames`<FromType, KeepType = any, Include = true>`](#getnames`<FromType,KeepType=any,Include=true>`)
     2. [LoseNames`<FromType, IgnoreType>`](#losenames`<FromType,IgnoreType>`)
     3. [Maybe`<T>`](#maybe`<T>`)
+    4. [TypeSelector`<State extends boolean, FirstType, SecondType>`](#typeselector`<state-extends-boolean,-firsttype,-secondtype>`)
 4. [Statement Control](#statement-control)
     1. [UnreachableStatementError](#unreachablestatementerror)
 
@@ -235,6 +236,60 @@ function processData(command: string): Maybe<string> {
         // to be some code here
         console.log("stop now"); // if command is stop - nothing return;
     }
+}
+```
+
+### TypeSelector`<State extends boolean, FirstType, SecondType>
+
+    TypeSelector is type to select one of two types. Its usuful when some interface or type generates 2 linked types.
+    For example, Server fetch data and Client model data.
+    <State> true or false state
+    <FirstType> to be type on true
+    <SecondType> to be type on false
+
+[TypeSelector declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_buildin_over.ts)
+
+```typescript
+import { TypeSelector } from "ts-it-types";
+
+/** Human readable alias on true */
+type ServerData = true;
+
+/** Human readable alias on false */
+type ClientData = false;
+
+interface UserResponse<K extends boolean> {
+    /** User Name */
+    name: string;
+    /** User Status: server send status as number 0, 1, 2. But here useful constant "NEW", "ACTIVE" or "BLOCK" */
+    status: TypeSelector<K, 0 | 1 | 2, string>
+}
+/** After fetch data */
+interface UserDto extends UserResponse<ServerData> {}
+
+/** After PROCESS fetched data */
+interface UserModel extends UserResponse<ClientData> {}
+
+const UserStatus = {
+    0: "NEW",
+    1: "ACTIVE",
+    2: "BLOCKED",
+}
+
+function loadUsers(): UserModel[] {
+    return fetchEmulator("/users").map(userDto => {
+        return {...userDto, status: UserStatus[userDto.status]};
+    });
+}
+
+function fetchEmulator(url: string): UserDto[] {
+    return [{
+        name: "Evg Pal",
+        status: 0 // to be "NEW" on client side
+    }, {
+        name: "Joh Dri",
+        status: 1 // to be "ACTIVE" on client side
+    }];
 }
 ```
 

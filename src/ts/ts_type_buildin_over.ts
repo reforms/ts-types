@@ -25,3 +25,11 @@ export type LoseNames<FromType, IgnoreType> = GetNames<FromType, IgnoreType, fal
  * Be or not to be...
  */
 export type Maybe<T> = T | void;
+
+/**
+ * Select type
+ * @template State true or false 
+ * @template FirstType to be type on true
+ * @template SecondType to be type on false
+ */
+export type TypeSelector<State extends boolean, FirstType, SecondType> = State extends true ? FirstType : SecondType;

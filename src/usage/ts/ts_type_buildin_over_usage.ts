@@ -1,4 +1,4 @@
-import { GetNames, LoseNames, Maybe } from "ts_type_buildin_over";
+import { GetNames, LoseNames, Maybe, TypeSelector } from "ts_type_buildin_over";
 
 class SimpleClass {
 
@@ -60,3 +60,46 @@ function processData(command: string): Maybe<string> {
         console.log("stop now"); // if command is stop - nothing return;
     }
 }
+
+/** Human readable alias on true */
+type ServerData = true;
+
+/** Human readable alias on false */
+type ClientData = false;
+
+interface UserResponse<K extends boolean> {
+    /** User Name */
+    name: string;
+    /** User Status: server send status as number 0, 1, 2. But here useful constant "NEW", "ACTIVE" or "BLOCK" */
+    status: TypeSelector<K, 0 | 1 | 2, string>
+}
+/** After fetch data */
+interface UserDto extends UserResponse<ServerData> {}
+
+/** After PROCESS fetched data */
+interface UserModel extends UserResponse<ClientData> {}
+
+const UserStatus = {
+    0: "NEW",
+    1: "ACTIVE",
+    2: "BLOCKED",
+}
+
+function loadUsers(): UserModel[] {
+    return fetchEmulator("/users").map(userDto => {
+        return {...userDto, status: UserStatus[userDto.status]};
+    });
+}
+
+function fetchEmulator(url: string): UserDto[] {
+    return [{
+        name: "Evg Pal",
+        status: 0
+    }, {
+        name: "Joh Dri",
+        status: 1
+    }];
+}
+
+
+
