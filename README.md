@@ -26,6 +26,11 @@ TypeScript Useful Types
     4. [TypeSelector`<State extends boolean, FirstType, SecondType>`](#typeselector`<state-extends-boolean,-firsttype,-secondtype>`)
 4. [Statement Control](#statement-control)
     1. [UnreachableStatementError](#unreachablestatementerror)
+5. [Tuple](#Tuple)
+    1. [Prepend`<Tuple extends any[], Addend>`](#Prepend`<Tuple-extends-any[],-Addend>`)
+    2. [Reverse`<Tuple extends any[]>`](#Reverse`<Tuple-extends-any[]>`)
+    3. [TupleOf`<T extends string>`](#TupleOf`<T-extends-string>`)
+    4. [UnionOf`<Tuple extends any[], Union = never>`](#UnionOf`<Tuple-extends-any[],-Union-=-never>`)
 
 ## Map types
 
@@ -134,7 +139,7 @@ import { R17n, R23, R50n, R100n, RQ } from "ts-it-types";
 // [17 .. 23] Include all numbers from 17 to 23
 type R_17_to_23 = RQ<R17n, R23>;
 
-// [50 .. 100] Include all numbers from 50 to 99. Attention: 100 - excluded
+// [50 .. 100) Include all numbers from 50 to 99. Attention: 100 - excluded
 type R_50_to_100n = RQ<R50n, R100n>;
 ```
 
@@ -342,4 +347,79 @@ class StepWizard {
         }
     }
 }
+```
+
+## Tuple
+
+    Tuple utility types
+
+### Prepend`<Tuple extends any[], Addend>`
+
+    Prepend is a type of pushing a value in the begining of an array
+    <Tuple> array of data
+    <Addend> adding value
+
+[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+
+```typescript
+import { Prepend } from "ts-it-types";
+
+type DirectNumbers = ["1", "2", "3"];
+
+// be: ["0", "1", "2", "3"]
+type DirectNumbersWith0 = Prepend<DirectNumbers, "0">;
+```
+
+### Reverse`<Tuple extends any[]>
+
+    Reverse is a type of reversing an array values
+    <Tuple> array of data
+
+[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+
+```typescript
+import { Reverse } from "ts-it-types";
+
+type DirectNumbers = ["1", "2", "3"];
+
+// be: ["3", "2", "1"]
+type ReverseNumbers = Reverse<DirectNumbers>;
+```
+
+### TupleOf`<T extends string>`
+
+    TupleOf is a type to convert union to array
+    <T> union of string keys
+
+[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+
+```typescript
+import { TupleOf } from "ts-it-types";
+
+interface Person {
+    firstName: string;
+    lastName: string;
+    position: string;
+}
+
+// be: "firstName" | "lastName" | "position"
+type PersonFieldUnion = keyof Person;
+
+// be: ["firstName", "lastName", "position"]
+type PersonFieldTuple = TupleOf<PersonFieldUnion>;
+```
+
+### UnionOf`<Tuple extends any[], Union = never>
+
+    UnionOf is a type to convert array to union
+    <Tuple> array of data
+    <Union> initial union values. default never
+
+[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+
+```typescript
+import { UnionOf } from "ts-it-types";
+
+// be: "firstName" | "lastName" | "position"
+type PersonFieldUnion = UnionOf<["firstName", "lastName", "position"]>;
 ```
