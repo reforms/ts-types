@@ -372,10 +372,10 @@ type DirectNumbersWith0 = Prepend<DirectNumbers, "0">;
 
 ### Reverse`<Tuple extends any[]>
 
-    Reverse is a type of reversing an array values
+    Reverse is a type to reverse array
     <Tuple> array of data
 
-[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+[Reverse declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
 
 ```typescript
 import { Reverse } from "ts-it-types";
@@ -391,7 +391,7 @@ type ReverseNumbers = Reverse<DirectNumbers>;
     TupleOf is a type to convert union to array
     <T> union of string keys
 
-[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+[TupleOf declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
 
 ```typescript
 import { TupleOf } from "ts-it-types";
@@ -413,9 +413,9 @@ type PersonFieldTuple = TupleOf<PersonFieldUnion>;
 
     UnionOf is a type to convert array to union
     <Tuple> array of data
-    <Union> initial union values. default never
+    <Union> initial union value. default never
 
-[Prepend declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
+[UnionOf declaration](https://github.com/reforms/ts-types/blob/master/src/ts/ts_type_tuple.ts)
 
 ```typescript
 import { UnionOf } from "ts-it-types";
